@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "399159894841",
+    "project_id": "rattlerbees",
+    "storage_bucket": "rattlerbees.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399159894841:android:5054a99f75add73a42bee8",
+        "android_client_info": {
+          "package_name": "com.isaiah.rattlerbees"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399159894841-77jvctskr5sm8905rdsaqa68ofdkmhpc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZfSiLOTbVtlua8qSm1gtz49I1m3hejBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399159894841-77jvctskr5sm8905rdsaqa68ofdkmhpc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
