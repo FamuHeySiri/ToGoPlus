@@ -72,17 +72,26 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     // stores new user data into firestore
-    private fun addNewUser(email: String, name: String) {
+    private fun addDataToFirestore(email: String, name: String) {
 
-        // create a hashmap for a new user and their data values
-        val user = hashMapOf(
-                "full_name" to name,
-                "email" to email
-        )
+        // convert full name to an array of names
+        val nameArray = name.split(" ").toTypedArray()
+
+        // Declare hashmap for the users data
+        val userHashMap = HashMap<String, Any>()
+
+        // Set user data to hashmap
+        userHashMap["user_uid"] = auth.currentUser.uid
+        userHashMap["user_firstName"] = nameArray[0]
+        userHashMap["user_lasName"] = nameArray[1]
+        userHashMap["user_email"] = email
+        userHashMap["user_phoneNumber"] = ""
+        userHashMap["user_accountType"] = "CUSTOMER"
+
 
         // Add a new document with a generated ID
         db.collection("USERS")
-            .add(user)
+            .add(userHashMap)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
             }
@@ -90,6 +99,21 @@ class RegisterActivity : AppCompatActivity() {
                 Log.w(TAG, "Error adding document", e)
             }
     }
+
+    // read data from firestore
+    fun readUserCollection(){
+        db.collection("USERS")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }
+    }
+
 
     // on activity startup
     public override fun onStart() {
@@ -124,7 +148,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful){
                         // Sign in success, update UI with current user's information
                         Log.d(TAG, "createUserWithEmail: Success")
-                        addNewUser(email, name)
+                        addDataToFirestore(email, name)
                         goToMainActivity()
                     } else {
                         // If sign in fails, display a message to the user.
