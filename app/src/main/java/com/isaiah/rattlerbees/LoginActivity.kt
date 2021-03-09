@@ -9,6 +9,7 @@ import android.widget.Toast
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
@@ -19,6 +20,9 @@ class LoginActivity : AppCompatActivity() {
 
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
+
+    // Access a Cloud Firestore instance from your Activity
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,15 +76,66 @@ class LoginActivity : AppCompatActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
     }
 
-    private fun goToLoginActivity() {
+
+    private fun goToAdminPortal() {
         // create intent to navigate to main activity
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, AdminPortal::class.java)
         startActivity(intent)
-//        finish()
+        finish()
     }
+
+    private fun goToEmployeePortal() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, EmployeePortal::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToUserPortal() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, UserPortal::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToPortal(){
+        // read single document from user collection
+        db.collection("USERS").document(auth.currentUser.uid)
+            .get()
+            .addOnSuccessListener {document ->
+                if (document != null){
+                    Log.d(RegisterActivity.TAG, "DocumentSnapshot data: ${document.data}")
+
+                    val accountType = document.getString("user_accountType")
+
+                    if (accountType == "ADMIN"){
+                        // go to admin portal
+                        goToAdminPortal()
+                    } else if (accountType == "EMPLOYEE") {
+                        // go to employee portal
+                        goToEmployeePortal()
+                    } else if (accountType == "CUSTOMER") {
+                        // go to user portal
+                        goToUserPortal()
+                    } else {
+                        Log.d(TAG, "user account type not found")
+                    }
+
+
+                } else {
+                    Log.d(RegisterActivity.TAG, "Document not found")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(RegisterActivity.TAG, "get() failed with ", exception)
+            }
+
+
+    }
+
 
     private fun signOn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -88,8 +143,12 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful){
                         // Sign in success, update UI with current user's information
                         Log.d(RegisterActivity.TAG, "signInWithEmail: Success")
+
                         val user = auth.currentUser
-                        goToMainActivity()
+
+                        navigateToPortal()
+
+//                        goToMainActivity()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(RegisterActivity.TAG, "signInWithEmail: Failure", task.exception)

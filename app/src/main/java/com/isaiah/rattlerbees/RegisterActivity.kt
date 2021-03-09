@@ -89,18 +89,18 @@ class RegisterActivity : AppCompatActivity() {
         userHashMap["user_accountType"] = "CUSTOMER"
 
 
-        // Add a new document with a generated ID
-        db.collection("USERS")
-            .add(userHashMap)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
+        // To create or overwrite a specific document using the set method
+        db.collection("USERS").document(auth.currentUser.uid)
+                .set(userHashMap)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${auth.currentUser.uid}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
     }
 
-    // read data from firestore
+    // read data from current user
     fun readUserCollection(){
         db.collection("USERS")
                 .get()
