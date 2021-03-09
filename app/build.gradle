@@ -9,6 +9,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.isaiah.rattlerbees"
         minSdkVersion 16
         targetSdkVersion 30
@@ -52,4 +53,9 @@ dependencies {
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // Declare dependency for the Firebase Firestore library
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.android.support:multidex:1.0.3'
+
 }

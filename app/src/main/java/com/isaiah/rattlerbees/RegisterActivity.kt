@@ -49,12 +49,6 @@ class RegisterActivity : AppCompatActivity() {
 
             }
 
-
-
-
-
-
-
         }
 
         btnCancel.setOnClickListener {
@@ -64,6 +58,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
     }
+
 
     public override fun onStart() {
         super.onStart()
@@ -79,15 +74,17 @@ class RegisterActivity : AppCompatActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
     }
+
 
     private fun goToLoginActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
     }
+
 
     private fun registerNewUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
