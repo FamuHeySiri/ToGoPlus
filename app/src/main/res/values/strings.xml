@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Rattlerbees</string>
 
+    <string name="api_key">uxUcmfEilyVJhcmLhAJEsNHfUBDi1pXB01YJRsfL</string>
+    <string name="nasa_api_url">https://api.nasa.gov/planetary/apod?api_key=</string>
+    <string name="bill_gates">Bill Gates</string>
+    <string name="admin">ADMIN</string>
+    <string name="billgates_microsoft_com">billgates@microsoft.com</string>
+    <string name="logout">Logout</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.isaiah.rattlerbees
+package com.isaiah.rattlerbees.activities.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,11 @@ import com.google.firebase.auth.ktx.auth
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.isaiah.rattlerbees.R
+import com.isaiah.rattlerbees.activities.AdminPortal.AdminPortal
+import com.isaiah.rattlerbees.activities.AdminPortal.DisplayUsers
+import com.isaiah.rattlerbees.activities.CustomerPortal.UserPortal
+import com.isaiah.rattlerbees.activities.EmployeePortal.EmployeePortal
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -122,17 +127,71 @@ class RegisterActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null){
-            goToMainActivity();
+            navigateToPortal();
         }
     }
 
-    // create intent to navigate to main activity
-    private fun goToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun navigateToPortal(){
+        // read single document from user collection
+        db.collection("USERS").document(auth.currentUser.uid)
+            .get()
+            .addOnSuccessListener {document ->
+                if (document != null){
+                    Log.d(RegisterActivity.TAG, "DocumentSnapshot data: ${document.data}")
+
+                    val accountType = document.getString("user_accountType")
+
+                    if (accountType == "ADMIN"){
+                        // go to admin portal
+                        goToDisplayUsersActivity()
+                    } else if (accountType == "EMPLOYEE") {
+                        // go to employee portal
+                        goToEmployeePortal()
+                    } else if (accountType == "CUSTOMER") {
+                        // go to user portal
+                        goToUserPortal()
+                    } else {
+                        Log.d(LoginActivity.TAG, "user account type not found")
+                    }
+
+
+                } else {
+                    Log.d(RegisterActivity.TAG, "Document not found")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(RegisterActivity.TAG, "get() failed with ", exception)
+            }
+    }
+
+    private fun goToDisplayUsersActivity() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, DisplayUsers::class.java)
         startActivity(intent)
         finish()
     }
 
+
+    private fun goToAdminPortal() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, AdminPortal::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToEmployeePortal() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, EmployeePortal::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToUserPortal() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, UserPortal::class.java)
+        startActivity(intent)
+        finish()
+    }
 
     // create intent to navigate to log in activity
     private fun goToLoginActivity() {
@@ -149,7 +208,7 @@ class RegisterActivity : AppCompatActivity() {
                         // Sign in success, update UI with current user's information
                         Log.d(TAG, "createUserWithEmail: Success")
                         addDataToFirestore(email, name)
-                        goToMainActivity()
+                        navigateToPortal()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)

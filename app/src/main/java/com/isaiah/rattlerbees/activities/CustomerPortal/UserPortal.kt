@@ -1,4 +1,4 @@
-package com.isaiah.rattlerbees
+package com.isaiah.rattlerbees.activities.CustomerPortal
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.isaiah.rattlerbees.R
+import com.isaiah.rattlerbees.activities.Login.LoginActivity
+import com.isaiah.rattlerbees.activities.Login.RegisterActivity
 
-class AdminPortal : AppCompatActivity() {
+class UserPortal : AppCompatActivity() {
 
     companion object {
         const val TAG = "LoginActivity"
@@ -24,13 +27,13 @@ class AdminPortal : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_portal)
+        setContentView(R.layout.activity_user_portal)
 
         // create instance for current auth token
         auth = Firebase.auth
 
-        // inantiate layout objects
-        val btnLogout = findViewById<Button>(R.id.adminPortal_btnLogout)
+        // instantiate layout objects
+        val btnLogout = findViewById<Button>(R.id.userPortal_btnLogout)
 
         // log the current users information
         readUserDoc()
@@ -38,6 +41,19 @@ class AdminPortal : AppCompatActivity() {
         btnLogout.setOnClickListener {
             signOut()
         }
+
+        // TODO: 3/9/21 Deactivate account
+        // TODO: 3/9/21 Start an Order
+        // TODO: 3/9/21 Show Menu
+        // TODO: 3/9/21 Select category
+        // TODO: 3/9/21 Add an item to order
+        // TODO: 3/9/21 Show current order
+        // TODO: 3/9/21 Place order
+        // TODO: 3/9/21 Show status
+        // TODO: 3/9/21 Cancel order 
+        // TODO: 3/9/21 Rate an order 
+        // TODO: 3/9/21 View order history 
+        
     }
 
     private fun signOut(){
@@ -67,5 +83,4 @@ class AdminPortal : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 }

@@ -1,4 +1,4 @@
-package com.isaiah.rattlerbees
+package com.isaiah.rattlerbees.activities.Login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +11,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.isaiah.rattlerbees.*
+import com.isaiah.rattlerbees.activities.AdminPortal.AdminPortal
+import com.isaiah.rattlerbees.activities.AdminPortal.DisplayUsers
+import com.isaiah.rattlerbees.activities.CustomerPortal.UserPortal
+import com.isaiah.rattlerbees.activities.EmployeePortal.EmployeePortal
 
 class LoginActivity : AppCompatActivity() {
 
@@ -68,13 +73,13 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null){
-            goToMainActivity();
+            navigateToPortal();
         }
     }
 
-    private fun goToMainActivity() {
+    private fun goToDisplayUsersActivity() {
         // create intent to navigate to main activity
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, DisplayUsers::class.java)
         startActivity(intent)
         finish()
     }
@@ -113,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if (accountType == "ADMIN"){
                         // go to admin portal
-                        goToAdminPortal()
+                        goToDisplayUsersActivity()
                     } else if (accountType == "EMPLOYEE") {
                         // go to employee portal
                         goToEmployeePortal()
@@ -132,8 +137,6 @@ class LoginActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d(RegisterActivity.TAG, "get() failed with ", exception)
             }
-
-
     }
 
 

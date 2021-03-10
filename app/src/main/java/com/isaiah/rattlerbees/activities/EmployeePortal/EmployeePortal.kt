@@ -1,4 +1,4 @@
-package com.isaiah.rattlerbees
+package com.isaiah.rattlerbees.activities.EmployeePortal
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.isaiah.rattlerbees.R
+import com.isaiah.rattlerbees.activities.Login.LoginActivity
+import com.isaiah.rattlerbees.activities.Login.RegisterActivity
 
-class MainActivity : AppCompatActivity() {
+class EmployeePortal : AppCompatActivity() {
 
     companion object {
         const val TAG = "LoginActivity"
@@ -24,13 +27,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_employee_portal)
 
         // create instance for current auth token
         auth = Firebase.auth
 
         // inantiate layout objects
-        val btnLogout = findViewById<Button>(R.id.main_btnLogout)
+        val btnLogout = findViewById<Button>(R.id.employeePortal_btnLogout)
 
         // log the current users information
         readUserDoc()
@@ -38,8 +41,11 @@ class MainActivity : AppCompatActivity() {
         btnLogout.setOnClickListener {
             signOut()
         }
-    }
 
+        // TODO: 3/9/21 show orders
+        // TODO: 3/9/21 change order status
+        // TODO: 3/9/21 show order rating
+    }
 
     private fun signOut(){
         Firebase.auth.signOut()
@@ -49,23 +55,23 @@ class MainActivity : AppCompatActivity() {
     private fun readUserDoc(){
         // read single document from user collection
         db.collection("USERS").document(auth.currentUser.uid)
-                .get()
-                .addOnSuccessListener {document ->
-                    if (document != null){
-                        Log.d(RegisterActivity.TAG, "DocumentSnapshot data: ${document.data}")
-                    } else {
-                        Log.d(RegisterActivity.TAG, "Document not found")
-                    }
+            .get()
+            .addOnSuccessListener {document ->
+                if (document != null){
+                    Log.d(RegisterActivity.TAG, "DocumentSnapshot data: ${document.data}")
+                } else {
+                    Log.d(RegisterActivity.TAG, "Document not found")
                 }
-                .addOnFailureListener { exception ->
-                    Log.d(RegisterActivity.TAG, "get() failed with ", exception)
-                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(RegisterActivity.TAG, "get() failed with ", exception)
+            }
     }
 
     private fun goToLoginActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
     }
 }
