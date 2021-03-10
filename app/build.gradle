@@ -9,6 +9,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.isaiah.rattlerbees"
         minSdkVersion 16
         targetSdkVersion 30
@@ -45,4 +46,30 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.6.0')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // Declare dependency for the Firebase Firestore library
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // Declare dependency for the CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:7.1.1'
+
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
 }
