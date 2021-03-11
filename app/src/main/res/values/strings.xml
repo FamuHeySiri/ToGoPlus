@@ -7,5 +7,6 @@
     <string name="admin">ADMIN</string>
     <string name="billgates_microsoft_com">billgates@microsoft.com</string>
     <string name="logout">Logout</string>
+    <string name="search">search</string>
 
 </resources>

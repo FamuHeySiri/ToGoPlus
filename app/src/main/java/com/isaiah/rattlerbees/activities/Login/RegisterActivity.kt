@@ -88,7 +88,7 @@ class RegisterActivity : AppCompatActivity() {
         // Set user data to hashmap
         userHashMap["user_uid"] = auth.currentUser.uid
         userHashMap["user_firstName"] = nameArray[0]
-        userHashMap["user_lasName"] = nameArray[1]
+        userHashMap["user_lastName"] = nameArray[1]
         userHashMap["user_email"] = email
         userHashMap["user_phoneNumber"] = ""
         userHashMap["user_accountType"] = "CUSTOMER"
