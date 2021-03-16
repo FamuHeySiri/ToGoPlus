@@ -42,14 +42,6 @@ class AdminMainActivity : AppCompatActivity() {
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
 
-    // query for users collection
-    val user_query = db.collection("USERS")
-    val options = FirestoreRecyclerOptions.Builder<UserModel>().setQuery(user_query, UserModel::class.java)
-            .setLifecycleOwner(this).build()
-
-
-
-
     // Called when the activity is first created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
