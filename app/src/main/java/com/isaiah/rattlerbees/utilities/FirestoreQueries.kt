@@ -2,6 +2,7 @@ package com.isaiah.rattlerbees.utilities
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.activities.Login.RegisterActivity
@@ -9,10 +10,12 @@ import com.isaiah.rattlerbees.activities.Login.RegisterActivity
 class FirestoreQueries {
 
     // Initialize Firebase Auth
-    private lateinit var auth: FirebaseAuth
+    var auth: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
+
+    public val orders_query = db.collection("ORDERS").whereEqualTo("user_id", auth?.uid.toString())
 
     // Read Specific user document
     private fun readUserDoc(userId: String){

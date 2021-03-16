@@ -109,6 +109,7 @@ class RegisterActivity : AppCompatActivity() {
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)
                 }
+
     }
 
     // read data from current user

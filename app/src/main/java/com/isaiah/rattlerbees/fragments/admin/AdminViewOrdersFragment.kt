@@ -1,6 +1,8 @@
 package com.isaiah.rattlerbees.fragments.admin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
@@ -32,7 +35,11 @@ class AdminViewOrdersFragment : Fragment() {
     val db = Firebase.firestore
 
     // query for users collection
-    val orders_query = db.collection("ORDERS").orderBy("order_time")
+    val orders_query = db
+        .collection("ORDERS")
+        .orderBy("order_time")
+        .orderBy("order_time", Query.Direction.DESCENDING)
+        .limit(50)
     val options = FirestoreRecyclerOptions.Builder<OrdersModel>().setQuery(orders_query, OrdersModel::class.java)
         .setLifecycleOwner(this).build()
 
@@ -69,15 +76,30 @@ class AdminViewOrdersFragment : Fragment() {
             return AdminOrdersViewHolder(view)
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: AdminViewOrdersFragment.AdminOrdersViewHolder, position: Int, model: OrdersModel) {
 
             val order_id:  TextView = holder.itemView.findViewById(R.id.orders_card_order_id)
-            val user_id: TextView = holder.itemView.findViewById(R.id.orders_card_customer_name)
             val order_time: TextView = holder.itemView.findViewById(R.id.orders_card_order_time)
             val order_status: TextView = holder.itemView.findViewById(R.id.orders_card_order_status)
+            val user_name: TextView = holder.itemView.findViewById(R.id.orders_card_customer_name)
+
+            val userRef = db.collection("USERS").document(model.user_id.toString())
+            userRef.get()
+                .addOnSuccessListener { document ->
+                    if(document != null){
+                        Log.d("EMP_V.O.F", "DocumentSnapshot data: ${document.data}")
+                        user_name.text = document.getString("user_firstName").toString() + " " + document.getString("user_lastName").toString()
+
+                    } else {
+                        Log.d("EMP_V.O.F", "No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("EMP_V.O.F", "get failed with ", exception)
+                }
 
             order_id.text = model.order_id
-            user_id.text = model.user_id
             order_time.text = model.order_time.toString()
             order_status.text = model.order_status
 

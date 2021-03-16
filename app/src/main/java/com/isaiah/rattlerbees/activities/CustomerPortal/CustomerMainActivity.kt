@@ -21,15 +21,9 @@ import com.isaiah.rattlerbees.fragments.customer.*
 
 class CustomerMainActivity : AppCompatActivity() {
 
-    companion object {
-        const val TAG = "LoginActivity"
+    private companion object {
+        const val TAG = "CUSTOMER_MAIN_ACTIVITY"
     }
-
-    // Initialize Firebase Auth
-    private lateinit var auth: FirebaseAuth
-
-    // Access a Cloud Firestore instance from your Activity
-    val db = Firebase.firestore
 
     // declare instances of fragments
     val customerHomeFragment = CustomerHomeFragment()
@@ -38,12 +32,18 @@ class CustomerMainActivity : AppCompatActivity() {
     val customerPlaceOrderFragment = CustomerPlaceOrderFragment()
     val customerShoppingCartFragment = CustomerShoppingCartFragment()
 
+    // Initialize Firebase Auth
+    private lateinit var auth: FirebaseAuth
 
-
+    // Access a Cloud Firestore instance from your Activity
+    val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_main)
+
+        // create instance for current auth token
+        auth = Firebase.auth
 
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottomNavigationView_Customer)
 
@@ -67,10 +67,6 @@ class CustomerMainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // create instance for current auth token
-        auth = Firebase.auth
-
 
         // log the current users information
         readUserDoc()

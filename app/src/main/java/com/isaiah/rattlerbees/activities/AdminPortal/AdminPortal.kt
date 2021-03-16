@@ -13,6 +13,7 @@ import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.activities.Login.LoginActivity
 
+// TODO: 3/16/21 Delete this file : Migrated to AdminMainActivity 
 
 class AdminPortal : AppCompatActivity() {
 
