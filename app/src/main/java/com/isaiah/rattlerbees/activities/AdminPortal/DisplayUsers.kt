@@ -19,6 +19,8 @@ import com.isaiah.rattlerbees.adapters.FirestoreAdapter_Users
 import com.isaiah.rattlerbees.models.UserModel
 
 
+// TODO: 3/16/21 Delete this file : Migrated to admin_view_users_fragment
+
 class DisplayUsers : AppCompatActivity() {
 
     private companion object {

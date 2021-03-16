@@ -20,6 +20,9 @@ import com.isaiah.rattlerbees.adapters.FirestoreAdapter_Users
 import com.isaiah.rattlerbees.models.OrdersModel
 import com.isaiah.rattlerbees.models.UserModel
 
+
+// TODO: 3/16/21 Delete this file : Migrated to employee_view_users_fragment
+
 class ViewOrdersActivity : AppCompatActivity() {
 
     private companion object {
