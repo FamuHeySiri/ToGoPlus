@@ -30,16 +30,15 @@ class EmployeeMainActivity : AppCompatActivity() {
         const val TAG = "EMPLOYEE_MAIN_ACTIVITY"
     }
 
+    // declare instances of fragments
+    val employeeHomeFragment = EmployeeHomeFragment()
+    val employeeViewOrdersFragment = EmployeeViewOrdersFragment()
+
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
-
-    // declare instances of fragments
-    val employeeHomeFragment = EmployeeHomeFragment()
-    val employeeViewOrdersFragment = EmployeeViewOrdersFragment()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

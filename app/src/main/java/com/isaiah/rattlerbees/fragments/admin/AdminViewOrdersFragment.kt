@@ -22,7 +22,7 @@ class AdminViewOrdersFragment : Fragment() {
 
 
     private companion object {
-        private const val TAG = "DISPLAY_USERS"
+        private const val TAG = "ADMIN_VIEW_ORDERS_FRAGMENT"
     }
 
     // Initialize Firebase Auth
