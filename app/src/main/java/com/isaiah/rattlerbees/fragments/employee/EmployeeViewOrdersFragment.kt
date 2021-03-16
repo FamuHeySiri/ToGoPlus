@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
@@ -31,7 +32,10 @@ class EmployeeViewOrdersFragment : Fragment() {
     val db = Firebase.firestore
 
     // query for users collection
-    val orders_query = db.collection("ORDERS").orderBy("order_time")
+    val orders_query = db
+        .collection("ORDERS")
+        .orderBy("order_time", Query.Direction.DESCENDING)
+        .limit(50)
     val options = FirestoreRecyclerOptions.Builder<OrdersModel>().setQuery(orders_query, OrdersModel::class.java)
         .setLifecycleOwner(this).build()
 

@@ -1,6 +1,7 @@
 package com.isaiah.rattlerbees.fragments.customer
 
 import android.annotation.SuppressLint
+import android.app.DownloadManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,11 +16,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.fragments.employee.EmployeeViewOrdersFragment
 import com.isaiah.rattlerbees.models.OrdersModel
+import com.isaiah.rattlerbees.utilities.FirestoreQueries
 
 
 class CustomerOrderHistoryFragment : Fragment() {
@@ -28,14 +31,18 @@ class CustomerOrderHistoryFragment : Fragment() {
         private const val TAG = "CUSTOMER_ORDER_HISTORY_FRAGMENT"
     }
 
-    // Initialize Firebase Auth
+//    // Initialize Firebase Auth
     var auth: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
 
     // query for users collection
-    val orders_query = db.collection("ORDERS").whereEqualTo("user_id", auth?.uid.toString())
+    val orders_query = db
+        .collection("ORDERS")
+        .whereEqualTo("user_id", auth?.uid.toString())
+        .orderBy("order_time", Query.Direction.DESCENDING)
+        .limit(50)
     val options = FirestoreRecyclerOptions.Builder<OrdersModel>().setQuery(orders_query, OrdersModel::class.java)
         .setLifecycleOwner(this).build()
 
