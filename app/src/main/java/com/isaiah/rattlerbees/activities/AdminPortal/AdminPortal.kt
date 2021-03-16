@@ -3,6 +3,8 @@ package com.isaiah.rattlerbees.activities.AdminPortal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +17,7 @@ import com.isaiah.rattlerbees.activities.Login.LoginActivity
 class AdminPortal : AppCompatActivity() {
 
     companion object {
-        const val TAG = "LoginActivity"
+        const val TAG = "Admin_Portal"
     }
 
     // Initialize Firebase Auth
@@ -24,19 +26,36 @@ class AdminPortal : AppCompatActivity() {
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        // inflate menu
+        menuInflater.inflate(R.menu.options_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id = item.itemId
+
+        if (id == R.id.menu_search){
+            Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
+        }
+        if (id == R.id.option_logout){
+            Toast.makeText(this, "Logging out", Toast.LENGTH_SHORT).show()
+            signOut()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_portal)
 
         // create instance for current auth token
         auth = Firebase.auth
-
-        // instantiate layout objects
-        val btnLogout = findViewById<Button>(R.id.adminPortal_btnLogout)
-
-        btnLogout.setOnClickListener {
-            signOut()
-        }
 
         // TODO: 3/9/21 Search for specific users
         // TODO: 3/9/21 Deactivate a user / ban a user
