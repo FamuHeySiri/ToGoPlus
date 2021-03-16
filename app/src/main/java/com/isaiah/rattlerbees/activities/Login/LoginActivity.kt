@@ -12,10 +12,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.*
-import com.isaiah.rattlerbees.activities.AdminPortal.AdminPortal
+import com.isaiah.rattlerbees.activities.AdminPortal.AdminMainActivity
 import com.isaiah.rattlerbees.activities.AdminPortal.DisplayUsers
-import com.isaiah.rattlerbees.activities.CustomerPortal.UserPortal
-import com.isaiah.rattlerbees.activities.EmployeePortal.EmployeePortal
+import com.isaiah.rattlerbees.activities.CustomerPortal.CustomerMainActivity
+import com.isaiah.rattlerbees.activities.EmployeePortal.EmployeeMainActivity
+import com.isaiah.rattlerbees.activities.EmployeePortal.ViewOrdersActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -64,7 +65,6 @@ class LoginActivity : AppCompatActivity() {
             // start next activity
             startActivity(intent)
         }
-
     }
 
 
@@ -85,23 +85,30 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun goToAdminPortal() {
+    private fun goToViewOrdersActivity() {
         // create intent to navigate to main activity
-        val intent = Intent(this, AdminPortal::class.java)
+        val intent = Intent(this, ViewOrdersActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun goToEmployeePortal() {
+    private fun goToAdminMainActivity() {
         // create intent to navigate to main activity
-        val intent = Intent(this, EmployeePortal::class.java)
+        val intent = Intent(this, AdminMainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun goToUserPortal() {
+    private fun goToEmployeeMainActivity() {
         // create intent to navigate to main activity
-        val intent = Intent(this, UserPortal::class.java)
+        val intent = Intent(this, EmployeeMainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToCustomerMainActivity() {
+        // create intent to navigate to main activity
+        val intent = Intent(this, CustomerMainActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -118,17 +125,16 @@ class LoginActivity : AppCompatActivity() {
 
                     if (accountType == "ADMIN"){
                         // go to admin portal
-                        goToDisplayUsersActivity()
+                        goToAdminMainActivity()
                     } else if (accountType == "EMPLOYEE") {
                         // go to employee portal
-                        goToEmployeePortal()
+                        goToEmployeeMainActivity()
                     } else if (accountType == "CUSTOMER") {
                         // go to user portal
-                        goToUserPortal()
+                        goToCustomerMainActivity()
                     } else {
                         Log.d(TAG, "user account type not found")
                     }
-
 
                 } else {
                     Log.d(RegisterActivity.TAG, "Document not found")
@@ -146,12 +152,8 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful){
                         // Sign in success, update UI with current user's information
                         Log.d(RegisterActivity.TAG, "signInWithEmail: Success")
-
-                        val user = auth.currentUser
-
                         navigateToPortal()
 
-//                        goToMainActivity()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(RegisterActivity.TAG, "signInWithEmail: Failure", task.exception)

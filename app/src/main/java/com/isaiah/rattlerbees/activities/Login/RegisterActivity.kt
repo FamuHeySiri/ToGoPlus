@@ -13,10 +13,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
-import com.isaiah.rattlerbees.activities.AdminPortal.AdminPortal
+import com.isaiah.rattlerbees.activities.AdminPortal.AdminMainActivity
 import com.isaiah.rattlerbees.activities.AdminPortal.DisplayUsers
-import com.isaiah.rattlerbees.activities.CustomerPortal.UserPortal
-import com.isaiah.rattlerbees.activities.EmployeePortal.EmployeePortal
+import com.isaiah.rattlerbees.activities.CustomerPortal.CustomerMainActivity
+import com.isaiah.rattlerbees.activities.EmployeePortal.EmployeeMainActivity
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -53,6 +53,8 @@ class RegisterActivity : AppCompatActivity() {
             // if all fields are completed
             if(etEmail.text.trim().toString().isNotEmpty() && etPassword.text.trim().toString().isNotEmpty() && etName.text.trim().toString().isNotEmpty()) {
 
+
+                // TODO: 3/15/21 Replace with specific error notifications 
                 // set values
                 val email = etEmail.text.trim().toString()
                 val password = etPassword.text.trim().toString()
@@ -66,6 +68,10 @@ class RegisterActivity : AppCompatActivity() {
                 // notify user of empty fields
                 Toast.makeText(this, "Input required", Toast.LENGTH_SHORT).show()
             }
+            
+            
+            
+            
         }
 
         // Perform this code when button is pressed
@@ -174,21 +180,21 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun goToAdminPortal() {
         // create intent to navigate to main activity
-        val intent = Intent(this, AdminPortal::class.java)
+        val intent = Intent(this, AdminMainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun goToEmployeePortal() {
         // create intent to navigate to main activity
-        val intent = Intent(this, EmployeePortal::class.java)
+        val intent = Intent(this, EmployeeMainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun goToUserPortal() {
         // create intent to navigate to main activity
-        val intent = Intent(this, UserPortal::class.java)
+        val intent = Intent(this, CustomerMainActivity::class.java)
         startActivity(intent)
         finish()
     }

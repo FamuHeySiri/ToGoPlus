@@ -16,52 +16,50 @@
         android:layout_height="wrap_content"
         android:padding="15dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_profile_image"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_centerVertical="true"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"/>
 
         <TextView
-            android:id="@+id/user_name"
+            android:id="@+id/orders_card_order_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:text="@string/order_id_sample"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/orders_card_customer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:textColor="#000"
-            android:layout_toRightOf="@+id/user_profile_image"
+            android:layout_below="@id/orders_card_order_id"
             android:layout_marginLeft="10dp"
-            android:text="@string/bill_gates"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/user_profile_image" />
-
-        <TextView
-            android:id="@+id/user_account_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#000"
-            android:layout_toRightOf="@+id/user_profile_image"
-            android:layout_below="@id/user_name"
-            android:layout_marginLeft="10dp"
-            android:text="@string/admin"
-            android:layout_toEndOf="@+id/user_profile_image"
+            android:text="@string/kevin_hart"
             android:layout_marginStart="10dp" />
 
         <TextView
-            android:id="@+id/user_email"
+            android:id="@+id/orders_card_order_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="#000"
-            android:layout_toRightOf="@+id/user_profile_image"
-            android:layout_below="@id/user_account_type"
+            android:layout_below="@id/orders_card_customer_name"
             android:layout_marginLeft="10dp"
-            android:text="@string/billgates_microsoft_com"
-            android:layout_toEndOf="@+id/user_profile_image"
+            android:text="@string/sample_timestamp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/orders_card_order_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_below="@id/orders_card_order_time"
+            android:layout_marginLeft="10dp"
+            android:text="@string/in_process"
             android:layout_marginStart="10dp"/>
 
     </RelativeLayout>
