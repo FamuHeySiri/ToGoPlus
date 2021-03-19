@@ -37,7 +37,6 @@ class AdminViewOrdersFragment : Fragment() {
     // query for users collection
     val orders_query = db
         .collection("ORDERS")
-        .orderBy("order_time")
         .orderBy("order_time", Query.Direction.DESCENDING)
         .limit(50)
     val options = FirestoreRecyclerOptions.Builder<OrdersModel>().setQuery(orders_query, OrdersModel::class.java)

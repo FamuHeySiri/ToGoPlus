@@ -36,5 +36,6 @@
     <string name="admin_home_fragment">Admin Home Fragment</string>
     <string name="admin_view_orders_fragment">Admin View Orders Fragment</string>
     <string name="admin_view_users_fragment">Admin View Users Fragment</string>
+    <string name="completed_orders">Completed Orders</string>
 
 </resources>

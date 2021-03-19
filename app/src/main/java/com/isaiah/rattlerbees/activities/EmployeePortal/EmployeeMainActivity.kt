@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.activities.Login.LoginActivity
 import com.isaiah.rattlerbees.activities.Login.RegisterActivity
+import com.isaiah.rattlerbees.fragments.employee.EmployeeCompletedOrdersFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeHomeFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeViewOrdersFragment
 
@@ -33,6 +34,7 @@ class EmployeeMainActivity : AppCompatActivity() {
     // declare instances of fragments
     val employeeHomeFragment = EmployeeHomeFragment()
     val employeeViewOrdersFragment = EmployeeViewOrdersFragment()
+    val employeeCompletedOrdersFragment = EmployeeCompletedOrdersFragment()
 
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
@@ -54,6 +56,9 @@ class EmployeeMainActivity : AppCompatActivity() {
                 }
                 R.id.employeeViewOrdersFragment -> {
                     setCurrentFragment(employeeViewOrdersFragment)
+                }
+                R.id.employeeCompletedOrdersFragment -> {
+                    setCurrentFragment(employeeCompletedOrdersFragment)
                 }
             }
         }
