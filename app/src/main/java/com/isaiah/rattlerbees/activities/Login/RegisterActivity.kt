@@ -98,6 +98,7 @@ class RegisterActivity : AppCompatActivity() {
         userHashMap["user_email"] = email
         userHashMap["user_phoneNumber"] = ""
         userHashMap["user_accountType"] = "CUSTOMER"
+        userHashMap["isActive"] = true
 
 
         // To create or overwrite a specific document using the set method
@@ -147,16 +148,24 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d(RegisterActivity.TAG, "DocumentSnapshot data: ${document.data}")
 
                     val accountType = document.getString("user_accountType")
+                    val isActive = document.getBoolean("isActive")
+
 
                     if (accountType == "ADMIN"){
                         // go to admin portal
-                        goToDisplayUsersActivity()
+                        goToAdminMainActivity()
                     } else if (accountType == "EMPLOYEE") {
                         // go to employee portal
-                        goToEmployeePortal()
+                        goToEmployeeMainActivity()
                     } else if (accountType == "CUSTOMER") {
-                        // go to user portal
-                        goToUserPortal()
+                        if(isActive != true){
+                            Log.d(LoginActivity.TAG, "user account is inActive")
+                            goToInactiveActivity()
+                        } else {
+                            // go to user portal
+                            goToCustomerMainActivity()
+                        }
+
                     } else {
                         Log.d(LoginActivity.TAG, "user account type not found")
                     }
@@ -171,6 +180,12 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    private fun goToInactiveActivity() {
+        val intent = Intent(this, InactiveAccountActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun goToDisplayUsersActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, DisplayUsers::class.java)
@@ -179,21 +194,21 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    private fun goToAdminPortal() {
+    private fun goToAdminMainActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, AdminMainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun goToEmployeePortal() {
+    private fun goToEmployeeMainActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, EmployeeMainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun goToUserPortal() {
+    private fun goToCustomerMainActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, CustomerMainActivity::class.java)
         startActivity(intent)

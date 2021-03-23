@@ -59,11 +59,8 @@ class AdminViewOrdersFragment : Fragment() {
         // assign layout manager and adapter to the view
         if (recyclerView != null) {
             recyclerView.layoutManager = LinearLayoutManager(context)
-        }
-        if (recyclerView != null) {
             recyclerView.adapter = AdminViewOrdersAdapter(options)
         }
-
     }
 
 

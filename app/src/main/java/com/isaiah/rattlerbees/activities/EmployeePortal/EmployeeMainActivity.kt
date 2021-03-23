@@ -24,12 +24,16 @@ import com.isaiah.rattlerbees.activities.Login.RegisterActivity
 import com.isaiah.rattlerbees.fragments.employee.EmployeeCompletedOrdersFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeHomeFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeViewOrdersFragment
+import com.isaiah.rattlerbees.utilities.FirestoreQueries
 
 class EmployeeMainActivity : AppCompatActivity() {
 
     private companion object {
         const val TAG = "EMPLOYEE_MAIN_ACTIVITY"
     }
+
+    // TODO: 3/20/21 remove this code to test using external classes
+    val firebaseUtil = FirestoreQueries()
 
     // declare instances of fragments
     val employeeHomeFragment = EmployeeHomeFragment()
@@ -47,6 +51,10 @@ class EmployeeMainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_employee_main)
 
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottomNavigationView_Employee)
+
+        firebaseUtil.fsTest(TAG, "this is a test message")
+
+
 
         setCurrentFragment(employeeHomeFragment)
         bottom_navigation.setOnNavigationItemReselectedListener {

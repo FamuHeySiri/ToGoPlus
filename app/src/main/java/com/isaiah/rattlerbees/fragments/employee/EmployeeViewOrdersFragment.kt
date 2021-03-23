@@ -22,7 +22,7 @@ import com.isaiah.rattlerbees.models.OrdersModel
 class EmployeeViewOrdersFragment : Fragment() {
 
     private companion object {
-        private const val TAG = "EMPLOYEE_VIEW_ORDERS_FRAGMENT"
+        private const val TAG = "EMP_VIEW_ORDERS_FRAGM"
     }
 
     // Initialize Firebase Auth
@@ -84,15 +84,15 @@ class EmployeeViewOrdersFragment : Fragment() {
             userRef.get()
                 .addOnSuccessListener { document ->
                     if(document != null){
-                        Log.d("EMP_V.O.F", "DocumentSnapshot data: ${document.data}")
+                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                         user_name.text = document.getString("user_firstName").toString() + " " + document.getString("user_lastName").toString()
 
                     } else {
-                        Log.d("EMP_V.O.F", "No such document")
+                        Log.d(TAG, "No such document")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.d("EMP_V.O.F", "get failed with ", exception)
+                    Log.d(TAG, "get failed with ", exception)
                 }
 
             order_id.text = model.order_id
