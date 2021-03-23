@@ -18,7 +18,7 @@ class FirestoreQueries {
     public val orders_query = db.collection("ORDERS").whereEqualTo("user_id", auth?.uid.toString())
 
     // Read Specific user document
-    private fun readUserDoc(userId: String){
+    fun readUserDoc(userId: String){
         // read single document from user collection
         db.collection("USERS").document(userId)
             .get()
@@ -35,7 +35,7 @@ class FirestoreQueries {
     }
 
     // Read Specific user document
-    private fun readAllUsers(){
+    fun readAllUsers(){
         // read single document from user collection
         db.collection("USERS")
             .get()
@@ -52,7 +52,7 @@ class FirestoreQueries {
     }
 
     // Read all order document
-    private fun readAllOrders(){
+    fun readAllOrders(){
         // read single document from user collection
         db.collection("ORDERS")
             .get()
@@ -70,7 +70,7 @@ class FirestoreQueries {
 
 
     // Read Specific user order history
-    private fun readOrderHistory(currentUserId: String){
+    fun readOrderHistory(currentUserId: String){
         // read single document from user collection
         db.collection("ORDERS")
             .whereEqualTo("user_id", currentUserId)
@@ -85,6 +85,10 @@ class FirestoreQueries {
             .addOnFailureListener { exception ->
                 Log.d(RegisterActivity.TAG, "get() failed with ", exception)
             }
+    }
+
+    fun fsTest(Tag: String, Msg: String){
+        Log.d(Tag, Msg)
     }
 
 

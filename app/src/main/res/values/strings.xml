@@ -36,5 +36,14 @@
     <string name="admin_home_fragment">Admin Home Fragment</string>
     <string name="admin_view_orders_fragment">Admin View Orders Fragment</string>
     <string name="admin_view_users_fragment">Admin View Users Fragment</string>
+    <string name="completed_orders">Completed Orders</string>
+    <string name="isaiah_mcnealy">Isaiah McNealy</string>
+    <string name="i_mcnealy_outlook_com">i-mcnealy@outlook.com</string>
+    <string name="customer">Customer</string>
+    <string name="delete_user">Delete User</string>
+    <string name="cart">Cart</string>
+    <string name="deactivate_user">Deactivate User</string>
+    <string name="activate_user">Activate User</string>
+    <string name="toggle_user_status">Toggle USer Status</string>
 
 </resources>

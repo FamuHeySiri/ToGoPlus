@@ -21,8 +21,10 @@ import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.activities.Login.LoginActivity
 import com.isaiah.rattlerbees.activities.Login.RegisterActivity
+import com.isaiah.rattlerbees.fragments.employee.EmployeeCompletedOrdersFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeHomeFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeViewOrdersFragment
+import com.isaiah.rattlerbees.utilities.FirestoreQueries
 
 class EmployeeMainActivity : AppCompatActivity() {
 
@@ -30,9 +32,13 @@ class EmployeeMainActivity : AppCompatActivity() {
         const val TAG = "EMPLOYEE_MAIN_ACTIVITY"
     }
 
+    // TODO: 3/20/21 remove this code to test using external classes
+    val firebaseUtil = FirestoreQueries()
+
     // declare instances of fragments
     val employeeHomeFragment = EmployeeHomeFragment()
     val employeeViewOrdersFragment = EmployeeViewOrdersFragment()
+    val employeeCompletedOrdersFragment = EmployeeCompletedOrdersFragment()
 
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
@@ -46,6 +52,10 @@ class EmployeeMainActivity : AppCompatActivity() {
 
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottomNavigationView_Employee)
 
+        firebaseUtil.fsTest(TAG, "this is a test message")
+
+
+
         setCurrentFragment(employeeHomeFragment)
         bottom_navigation.setOnNavigationItemReselectedListener {
             when (it.itemId){
@@ -54,6 +64,9 @@ class EmployeeMainActivity : AppCompatActivity() {
                 }
                 R.id.employeeViewOrdersFragment -> {
                     setCurrentFragment(employeeViewOrdersFragment)
+                }
+                R.id.employeeCompletedOrdersFragment -> {
+                    setCurrentFragment(employeeCompletedOrdersFragment)
                 }
             }
         }

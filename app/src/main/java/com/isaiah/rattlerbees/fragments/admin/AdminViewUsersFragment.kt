@@ -1,26 +1,26 @@
 package com.isaiah.rattlerbees.fragments.admin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
-import com.isaiah.rattlerbees.adapters.FirestoreAdapter_Users
 import com.isaiah.rattlerbees.models.UserModel
-import com.isaiah.rattlerbees.utilities.UserViewHolder
+import com.isaiah.rattlerbees.utilities.Communicator
 
 class AdminViewUsersFragment : Fragment() {
-
 
     private companion object {
         private const val TAG = "DISPLAY_USERS"
@@ -28,6 +28,8 @@ class AdminViewUsersFragment : Fragment() {
 
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
+
+    private lateinit var communicator: Communicator
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
@@ -37,28 +39,28 @@ class AdminViewUsersFragment : Fragment() {
     val options = FirestoreRecyclerOptions.Builder<UserModel>().setQuery(user_query, UserModel::class.java)
         .setLifecycleOwner(this).build()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_view_users, container, false)
+        val view = inflater.inflate(R.layout.fragment_admin_view_users, container, false)
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
 
         val recyclerView = getView()?.findViewById<RecyclerView>(R.id.recyclerview_admin_view_users)
 
         // assign layout manager and adapter to the view
         if (recyclerView != null) {
             recyclerView.layoutManager = LinearLayoutManager(context)
-        }
-        if (recyclerView != null) {
             recyclerView.adapter = AdminViewUserAdapter(options)
         }
-
     }
 
 
@@ -71,6 +73,7 @@ class AdminViewUsersFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: AdminUserViewHolder, position: Int, model: UserModel) {
+
             val user_name: TextView = holder.itemView.findViewById(R.id.user_name)
             val user_account: TextView = holder.itemView.findViewById(R.id.user_account_type)
             val user_email: TextView = holder.itemView.findViewById(R.id.user_email)
@@ -87,7 +90,46 @@ class AdminViewUsersFragment : Fragment() {
         }
     }
 
-    inner class AdminUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    inner class AdminUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View){
+
+            communicator = activity as Communicator
+
+            val position: Int = adapterPosition
+            val userId: String = options.snapshots.get(position).user_uid
+
+            if (position != RecyclerView.NO_POSITION){
+
+                val document = user_query.addSnapshotListener {
+                        snapshot, error ->
+
+                    if (error != null){
+                        // handle error
+                    }
+                    if (snapshot != null){
+                        // handle snapshot
+//                        Toast.makeText(context, userId, Toast.LENGTH_LONG).show()
+
+                        communicator.passDataCom(userId)
+                    }
+
+                }
+
+
+
+            }
+        }
     }
+
+
+//    interface OnItemClickListener {
+//        fun onItemClick(posistion: Int)
+//    }
 
 }

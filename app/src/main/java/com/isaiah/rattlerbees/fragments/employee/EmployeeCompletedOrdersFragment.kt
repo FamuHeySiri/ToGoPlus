@@ -1,4 +1,4 @@
-package com.isaiah.rattlerbees.fragments.admin
+package com.isaiah.rattlerbees.fragments.employee
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,13 +18,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.models.OrdersModel
-import com.isaiah.rattlerbees.models.UserModel
 
-class AdminViewOrdersFragment : Fragment() {
 
+class EmployeeCompletedOrdersFragment : Fragment() {
 
     private companion object {
-        private const val TAG = "ADMIN_VIEW_ORDERS_FRAGMENT"
+        private const val TAG = "EMPLOYEE_VIEW_ORDERS_FRAGMENT"
     }
 
     // Initialize Firebase Auth
@@ -37,45 +35,46 @@ class AdminViewOrdersFragment : Fragment() {
     // query for users collection
     val orders_query = db
         .collection("ORDERS")
+        .whereEqualTo("order_status", "Completed")
         .orderBy("order_time", Query.Direction.DESCENDING)
         .limit(50)
     val options = FirestoreRecyclerOptions.Builder<OrdersModel>().setQuery(orders_query, OrdersModel::class.java)
         .setLifecycleOwner(this).build()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_view_orders, container, false)
+        return inflater.inflate(R.layout.fragment_employee_completed_orders, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
-        val recyclerView = getView()?.findViewById<RecyclerView>(R.id.recyclerview_admin_view_orders)
+        val recyclerView = getView()?.findViewById<RecyclerView>(R.id.recyclerview_employee_completed_orders)
 
         // assign layout manager and adapter to the view
         if (recyclerView != null) {
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = AdminViewOrdersAdapter(options)
         }
+        if (recyclerView != null) {
+            recyclerView.adapter = EmployeeCompletedOrdersAdapter(options)
+        }
+
     }
 
+    inner class EmployeeCompletedOrdersAdapter(options: FirestoreRecyclerOptions<OrdersModel>) : FirestoreRecyclerAdapter<OrdersModel, EmployeeCompletedOrdersFragment.EmployeeCompletedOrdersViewHolder>(options){
 
-    inner class AdminViewOrdersAdapter(options: FirestoreRecyclerOptions<OrdersModel>) : FirestoreRecyclerAdapter<OrdersModel, AdminViewOrdersFragment.AdminOrdersViewHolder>(options){
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminViewOrdersFragment.AdminOrdersViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeCompletedOrdersFragment.EmployeeCompletedOrdersViewHolder {
             // inflate individual row layout
             val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
-            return AdminOrdersViewHolder(view)
+            return EmployeeCompletedOrdersViewHolder(view)
         }
 
         @SuppressLint("SetTextI18n")
-        override fun onBindViewHolder(holder: AdminViewOrdersFragment.AdminOrdersViewHolder, position: Int, model: OrdersModel) {
+        override fun onBindViewHolder(holder: EmployeeCompletedOrdersFragment.EmployeeCompletedOrdersViewHolder, position: Int, model: OrdersModel) {
 
-            val order_id:  TextView = holder.itemView.findViewById(R.id.orders_card_order_id)
+            val order_id: TextView = holder.itemView.findViewById(R.id.orders_card_order_id)
             val order_time: TextView = holder.itemView.findViewById(R.id.orders_card_order_time)
             val order_status: TextView = holder.itemView.findViewById(R.id.orders_card_order_status)
             val user_name: TextView = holder.itemView.findViewById(R.id.orders_card_customer_name)
@@ -105,7 +104,8 @@ class AdminViewOrdersFragment : Fragment() {
     }
 
 
-    inner class AdminOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class EmployeeCompletedOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
+
 
 }

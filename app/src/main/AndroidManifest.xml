@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rattlerbees">
-        <activity android:name=".activities.EmployeePortal.ViewOrdersActivity"></activity>
+        <activity android:name=".activities.Login.InactiveAccountActivity"></activity>
+        <activity android:name=".activities.EmployeePortal.ViewOrdersActivity" />
         <activity
             android:name=".activities.AdminPortal.AdminMainActivity"
             android:label="@string/title_activity_main"

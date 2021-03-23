@@ -77,20 +77,20 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToDisplayUsersActivity() {
-        // create intent to navigate to main activity
-        val intent = Intent(this, DisplayUsers::class.java)
-        startActivity(intent)
-        finish()
-    }
+//    private fun goToDisplayUsersActivity() {
+//        // create intent to navigate to main activity
+//        val intent = Intent(this, DisplayUsers::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
 
 
-    private fun goToViewOrdersActivity() {
-        // create intent to navigate to main activity
-        val intent = Intent(this, ViewOrdersActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+//    private fun goToViewOrdersActivity() {
+//        // create intent to navigate to main activity
+//        val intent = Intent(this, ViewOrdersActivity::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
 
     private fun goToAdminMainActivity() {
         // create intent to navigate to main activity
@@ -113,6 +113,12 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun goToInactiveActivity() {
+        val intent = Intent(this, InactiveAccountActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun navigateToPortal(){
         // read single document from user collection
         db.collection("USERS").document(auth.currentUser.uid)
@@ -122,6 +128,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(RegisterActivity.TAG, "DocumentSnapshot data: ${document.data}")
 
                     val accountType = document.getString("user_accountType")
+                    val isActive = document.getBoolean("isActive")
 
                     if (accountType == "ADMIN"){
                         // go to admin portal
@@ -130,8 +137,13 @@ class LoginActivity : AppCompatActivity() {
                         // go to employee portal
                         goToEmployeeMainActivity()
                     } else if (accountType == "CUSTOMER") {
-                        // go to user portal
-                        goToCustomerMainActivity()
+                        if(isActive != true){
+                            Log.d(LoginActivity.TAG, "user account is inActive")
+                            goToInactiveActivity()
+                        } else {
+                            // go to user portal
+                            goToCustomerMainActivity()
+                        }
                     } else {
                         Log.d(TAG, "user account type not found")
                     }

@@ -22,10 +22,12 @@ import com.isaiah.rattlerbees.activities.Login.LoginActivity
 import com.isaiah.rattlerbees.fragments.admin.AdminHomeFragment
 import com.isaiah.rattlerbees.fragments.admin.AdminViewOrdersFragment
 import com.isaiah.rattlerbees.fragments.admin.AdminViewUsersFragment
+import com.isaiah.rattlerbees.fragments.admin.ViewUserDetailFragment
 import com.isaiah.rattlerbees.models.UserModel
+import com.isaiah.rattlerbees.utilities.Communicator
 
 
-class AdminMainActivity : AppCompatActivity() {
+class AdminMainActivity : AppCompatActivity(), Communicator {
 
     private companion object {
         private const val TAG = "ADMIN_MAIN_ACTIVITY"
@@ -66,7 +68,7 @@ class AdminMainActivity : AppCompatActivity() {
     }
 
     // swap out and replace current fragment
-    private fun setCurrentFragment(fragment: Fragment) {
+    private fun setCurrentFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.frameLayout_Admin, fragment)
             commit()
@@ -103,12 +105,25 @@ class AdminMainActivity : AppCompatActivity() {
         finish()
     }
 
-
     // navigate to login activity
     private fun goToLoginActivity() {
         // create intent to navigate to main activity
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun passDataCom(inputValue: String) {
+
+        val bundle = Bundle()
+        bundle.putString("user_uid", inputValue)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val userDetailFragment = ViewUserDetailFragment()
+        userDetailFragment.arguments = bundle
+
+        transaction.replace(R.id.frameLayout_Admin, userDetailFragment)
+        transaction.commit()
+
     }
 }
