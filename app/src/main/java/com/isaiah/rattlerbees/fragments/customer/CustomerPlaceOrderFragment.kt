@@ -14,6 +14,6 @@ class CustomerPlaceOrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_place_order, container, false)
+        return inflater.inflate(R.layout.fragment_customer_menu_items, container, false)
     }
 }

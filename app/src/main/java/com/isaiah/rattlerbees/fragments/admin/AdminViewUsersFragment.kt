@@ -29,6 +29,7 @@ class AdminViewUsersFragment : Fragment() {
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
 
+    // create object of our interface
     private lateinit var communicator: Communicator
 
     // Access a Cloud Firestore instance from your Activity

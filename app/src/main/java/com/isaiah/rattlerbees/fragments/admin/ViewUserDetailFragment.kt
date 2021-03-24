@@ -33,7 +33,7 @@ class ViewUserDetailFragment : Fragment() {
 
     // Identification tag for fragment
     private companion object {
-        private const val TAG = "USER_DETAILS"
+        const val TAG = "USER_DETAILS"
     }
 
     // Initialize Firebase Auth
@@ -65,7 +65,7 @@ class ViewUserDetailFragment : Fragment() {
         // TODO: 3/21/21  import selected user image
 //        val user_image:  = view.findViewById(R.id.detail_user_profile_image)
 
-        // Parse selected user documet and populate fields
+        // Parse selected user document and populate fields
         val selectedUserDocument = selectedUserId?.let { it ->
             db.collection("USERS").document(it).get()
                     .addOnSuccessListener {

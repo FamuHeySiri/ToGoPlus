@@ -21,12 +21,15 @@ import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.activities.Login.LoginActivity
 import com.isaiah.rattlerbees.activities.Login.RegisterActivity
+import com.isaiah.rattlerbees.fragments.admin.ViewUserDetailFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeCompletedOrdersFragment
+import com.isaiah.rattlerbees.fragments.employee.EmployeeEditOrderFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeHomeFragment
 import com.isaiah.rattlerbees.fragments.employee.EmployeeViewOrdersFragment
+import com.isaiah.rattlerbees.utilities.Communicator
 import com.isaiah.rattlerbees.utilities.FirestoreQueries
 
-class EmployeeMainActivity : AppCompatActivity() {
+class EmployeeMainActivity : AppCompatActivity(), Communicator {
 
     private companion object {
         const val TAG = "EMPLOYEE_MAIN_ACTIVITY"
@@ -51,10 +54,6 @@ class EmployeeMainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_employee_main)
 
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottomNavigationView_Employee)
-
-        firebaseUtil.fsTest(TAG, "this is a test message")
-
-
 
         setCurrentFragment(employeeHomeFragment)
         bottom_navigation.setOnNavigationItemReselectedListener {
@@ -138,5 +137,23 @@ class EmployeeMainActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun passDataCom(inputValue: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun passDataComEditOrder(inputValue: String) {
+
+        val bundle = Bundle()
+        bundle.putString("order_id", inputValue)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val EditOrderFragment = EmployeeEditOrderFragment()
+        EditOrderFragment.arguments = bundle
+
+        transaction.replace(R.id.frameLayout_Employee, EditOrderFragment)
+        transaction.commit()
+
     }
 }

@@ -18,12 +18,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.models.OrdersModel
+import com.isaiah.rattlerbees.utilities.Communicator
 
 
 class EmployeeCompletedOrdersFragment : Fragment() {
 
     private companion object {
-        private const val TAG = "EMPLOYEE_VIEW_ORDERS_FRAGMENT"
+        private const val TAG = "EMP_COMPLETE_ORDERS"
     }
 
     // Initialize Firebase Auth
@@ -31,6 +32,9 @@ class EmployeeCompletedOrdersFragment : Fragment() {
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
+
+    // create object of our interface
+    private lateinit var communicator: Communicator
 
     // query for users collection
     val orders_query = db
@@ -104,7 +108,43 @@ class EmployeeCompletedOrdersFragment : Fragment() {
     }
 
 
-    inner class EmployeeCompletedOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class EmployeeCompletedOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+
+        override fun onClick(view: View){
+
+            communicator = activity as Communicator
+
+            val position: Int = adapterPosition
+            val order_id: String = options.snapshots.get(position).order_id
+
+            if (position != RecyclerView.NO_POSITION){
+
+                val document = orders_query.addSnapshotListener {
+                        snapshot, error ->
+
+                    if (error != null){
+                        // handle error
+                    }
+                    if (snapshot != null){
+                        // handle snapshot
+//                        Toast.makeText(context, userId, Toast.LENGTH_LONG).show()
+
+                        communicator.passDataComEditOrder(order_id)
+                    }
+
+                }
+
+
+
+            }
+        }
+
+
     }
 
 
