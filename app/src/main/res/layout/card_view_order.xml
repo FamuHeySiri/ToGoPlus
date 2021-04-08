@@ -69,7 +69,7 @@
             android:layout_below="@id/orders_card_order_status"
             android:numStars="5"
             android:rating="0"
-            android:isIndicator="true"
+            android:isIndicator="false"
             android:stepSize=".5" />
 
 
