@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.employee.EmployeeEditOrderFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView_EditOrder_preparingOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/preparing_your_order" />
+
+            <TextView
+                android:id="@+id/textView_EditOrder_pickup_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ready_for_pickup_at_7_06pm" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#c0c0c0"/>
+
+            <TextView
+                android:id="@+id/textView_EditOrder_orderDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_details" />
+
+            <TextView
+                android:id="@+id/textView_EditOrder_itemCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/_1_item" />
+
+            <TextView
+                android:id="@+id/textView_EditOrder_displayItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:text="@string/_1x_burrito" />
+
+            <TextView
+                android:id="@+id/textView_EditOrder_subtotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/subtotal_8_50" />
+
+                android:id="@+id/textView_EditOrder_tax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tax_1_50" />
+
+            <TextView
+                android:id="@+id/textView_EditOrder_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_10_00" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#c0c0c0"/>
+
+            <TextView
+                android:id="@+id/textView__EditOrder_locationAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_123_east_tree_ln_tallahassee_fl_32304" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/button_EditOrder_inProcess"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/in_process"/>
+
+                <Button
+                    android:id="@+id/button_EditOrder_complete"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/complete"/>
+
+                <Button
+                    android:id="@+id/button_EditOrder_cancelOrder"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/cancel"/>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

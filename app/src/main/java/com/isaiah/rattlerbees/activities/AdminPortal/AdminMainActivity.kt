@@ -126,4 +126,8 @@ class AdminMainActivity : AppCompatActivity(), Communicator {
         transaction.commit()
 
     }
+
+    override fun passDataComEditOrder(inputValue: String) {
+        TODO("Not yet implemented")
+    }
 }

@@ -1,23 +1,18 @@
 package com.isaiah.rattlerbees.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.models.OrdersModel
-import com.isaiah.rattlerbees.models.UserModel
 import com.isaiah.rattlerbees.utilities.OrdersViewHolder
-import com.isaiah.rattlerbees.utilities.UserViewHolder
-import java.util.*
 
 class FirestoreAdapter_Orders(options: FirestoreRecyclerOptions<OrdersModel>) : FirestoreRecyclerAdapter<OrdersModel, OrdersViewHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_order, parent, false)
         return OrdersViewHolder(view)    }
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int, model: OrdersModel) {

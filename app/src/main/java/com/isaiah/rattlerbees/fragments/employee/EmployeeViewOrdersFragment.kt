@@ -18,15 +18,19 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.models.OrdersModel
+import com.isaiah.rattlerbees.utilities.Communicator
 
 class EmployeeViewOrdersFragment : Fragment() {
 
     private companion object {
-        private const val TAG = "EMP_VIEW_ORDERS_FRAGM"
+        private const val TAG = "EMP_VIEW_ORDERS"
     }
 
     // Initialize Firebase Auth
     private lateinit var auth: FirebaseAuth
+
+    // create object of our interface
+    private lateinit var communicator: Communicator
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
@@ -68,7 +72,7 @@ class EmployeeViewOrdersFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewOrdersFragment.EmployeeOrdersViewHolder {
             // inflate individual row layout
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_order, parent, false)
             return EmployeeOrdersViewHolder(view)
         }
 
@@ -105,7 +109,46 @@ class EmployeeViewOrdersFragment : Fragment() {
     }
 
 
-    inner class EmployeeOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class EmployeeOrdersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+
+        override fun onClick(view: View){
+
+            communicator = activity as Communicator
+
+            val position: Int = adapterPosition
+            val order_id: String = options.snapshots.get(position).order_id
+
+            if (position != RecyclerView.NO_POSITION){
+
+                val document = orders_query.addSnapshotListener {
+                        snapshot, error ->
+
+                    if (error != null){
+                        // handle error
+                    }
+                    if (snapshot != null){
+                        // handle snapshot
+//                        Toast.makeText(context, userId, Toast.LENGTH_LONG).show()
+
+                        communicator.passDataComEditOrder(order_id)
+                    }
+
+                }
+
+
+
+            }
+        }
+
     }
+
+
+
+
 
 }

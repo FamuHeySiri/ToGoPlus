@@ -1,6 +1,5 @@
 package com.isaiah.rattlerbees.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,7 +13,7 @@ import com.isaiah.rattlerbees.utilities.UserViewHolder
 class FirestoreAdapter_Users(options: FirestoreRecyclerOptions<UserModel>) : FirestoreRecyclerAdapter<UserModel, UserViewHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_user_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_user, parent, false)
         return UserViewHolder(view)
     }
 

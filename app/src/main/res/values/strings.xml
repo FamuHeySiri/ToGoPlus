@@ -27,7 +27,6 @@
     <string name="order_id_sample">Order: Ec7T1xhKF2aR7UK0UKjm</string>
     <string name="kevin_hart">Kevin Hart</string>
     <string name="sample_timestamp">5:30 PM - Sunday, March 21st</string>
-    <string name="in_process">In Process</string>
     <string name="shoppingcart">ShoppingCart</string>
     <string name="place_order">Place Order</string>
     <string name="shopping_cart">Shopping Cart</string>
@@ -45,5 +44,18 @@
     <string name="deactivate_user">Deactivate User</string>
     <string name="activate_user">Activate User</string>
     <string name="toggle_user_status">Toggle USer Status</string>
+    <string name="menu">Menu</string>
+    <string name="_123_east_tree_ln_tallahassee_fl_32304">123 East Tree Ln, Tallahassee, FL 32304</string>
+    <string name="preparing_your_order">Preparing your order</string>
+    <string name="ready_for_pickup_at_7_06pm">Ready for pickup at 7:06PM</string>
+    <string name="order_details">Order Details</string>
+    <string name="_1_item">1 Item</string>
+    <string name="_1x_burrito">1x Burrito</string>
+    <string name="subtotal_8_50">Subtotal: $8.50</string>
+    <string name="tax_1_50">Tax: $1.50</string>
+    <string name="total_10_00">Total: $10.00</string>
+    <string name="in_process">In Process</string>
+    <string name="complete">Complete</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
