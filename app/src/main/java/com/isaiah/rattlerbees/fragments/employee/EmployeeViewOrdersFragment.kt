@@ -17,7 +17,6 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
-import com.isaiah.rattlerbees.fragments.admin.ViewUserDetailFragment
 import com.isaiah.rattlerbees.models.OrdersModel
 import com.isaiah.rattlerbees.utilities.Communicator
 
@@ -73,7 +72,7 @@ class EmployeeViewOrdersFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewOrdersFragment.EmployeeOrdersViewHolder {
             // inflate individual row layout
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_order, parent, false)
             return EmployeeOrdersViewHolder(view)
         }
 

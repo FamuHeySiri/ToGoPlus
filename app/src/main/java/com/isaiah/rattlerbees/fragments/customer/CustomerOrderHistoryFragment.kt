@@ -1,7 +1,6 @@
 package com.isaiah.rattlerbees.fragments.customer
 
 import android.annotation.SuppressLint
-import android.app.DownloadManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,14 +14,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
-import com.isaiah.rattlerbees.fragments.employee.EmployeeViewOrdersFragment
 import com.isaiah.rattlerbees.models.OrdersModel
-import com.isaiah.rattlerbees.utilities.FirestoreQueries
 
 
 class CustomerOrderHistoryFragment : Fragment() {
@@ -81,7 +77,7 @@ class CustomerOrderHistoryFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerOrderHistoryFragment.CustomerOrderHistoryViewHolder {
             // inflate individual row layout
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_order, parent, false)
             return CustomerOrderHistoryViewHolder(view)
         }
 

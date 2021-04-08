@@ -1,6 +1,5 @@
 package com.isaiah.rattlerbees.models
 
-import java.sql.Timestamp
 import java.util.*
 
 data class OrdersModel (
@@ -12,6 +11,5 @@ data class OrdersModel (
     val order_id: String = "",
     val order_status: String = "",
     val order_items:  Array<String> = emptyArray()
-
 
 )

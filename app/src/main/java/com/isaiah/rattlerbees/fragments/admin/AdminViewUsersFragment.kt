@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
@@ -69,7 +67,7 @@ class AdminViewUsersFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminUserViewHolder {
             // inflate individual row layout
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_user_card, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_user, parent, false)
             return AdminUserViewHolder(view)
         }
 

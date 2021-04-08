@@ -77,20 +77,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    private fun goToDisplayUsersActivity() {
-//        // create intent to navigate to main activity
-//        val intent = Intent(this, DisplayUsers::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
-
-
-//    private fun goToViewOrdersActivity() {
-//        // create intent to navigate to main activity
-//        val intent = Intent(this, ViewOrdersActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
 
     private fun goToAdminMainActivity() {
         // create intent to navigate to main activity

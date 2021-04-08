@@ -1,7 +1,6 @@
 package com.isaiah.rattlerbees.fragments.admin
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,24 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
-import com.isaiah.rattlerbees.R.id.detail_user_profile_image
-import com.isaiah.rattlerbees.activities.Login.RegisterActivity
 import com.isaiah.rattlerbees.models.OrdersModel
-import com.isaiah.rattlerbees.models.UserModel
-import org.w3c.dom.Text
 
 
 class ViewUserDetailFragment : Fragment() {
@@ -163,7 +155,7 @@ class ViewUserDetailFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewUserDetailFragment.DetailUserViewHolder {
             // inflate individual row layout
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_order, parent, false)
             return DetailUserViewHolder(view)
         }
 

@@ -71,7 +71,7 @@ class EmployeeCompletedOrdersFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeCompletedOrdersFragment.EmployeeCompletedOrdersViewHolder {
             // inflate individual row layout
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_order_card, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_order, parent, false)
             return EmployeeCompletedOrdersViewHolder(view)
         }
 
