@@ -17,6 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
 import com.isaiah.rattlerbees.models.UserModel
 import com.isaiah.rattlerbees.utilities.Communicator
+import com.squareup.picasso.Picasso
 
 class AdminViewUsersFragment : Fragment() {
 
@@ -83,8 +84,12 @@ class AdminViewUsersFragment : Fragment() {
             user_name.text = fullName
             user_account.text = model.user_accountType
             user_email.text = model.user_email
-            // TODO: 3/10/21 insert user image from data store
-//        user_image.setImageResource(images[position])
+
+            if (model.user_photoURL.isEmpty()) {
+                user_image.setImageResource(R.mipmap.ic_launcher_round)
+            } else {
+                Picasso.get().load(model.user_photoURL).into(user_image)
+            }
 
         }
     }

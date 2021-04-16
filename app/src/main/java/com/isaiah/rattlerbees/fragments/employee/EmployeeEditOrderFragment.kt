@@ -63,12 +63,12 @@ class EmployeeEditOrderFragment : Fragment() {
                         Log.d(TAG, "DocumentSnapshot data: ${it.data}")
 
                         val timeStamp = it.get("order_time") as Timestamp
-                        var date: java.util.Date = timeStamp.toDate()
-                        var itemCount = it.get("order_itemCount").toString()
-                        var subtotal = it.get("order_subtotal").toString()
-                        var tax = it.get("order_tax").toString()
-                        var total = it.get("order_total").toString()
-                        var address = it.get("restaurant_location").toString()
+                        val date: java.util.Date = timeStamp.toDate()
+                        val itemCount = it.get("order_itemCount").toString()
+                        val subtotal = it.get("order_subtotal").toString()
+                        val tax = it.get("order_tax").toString()
+                        val total = it.get("order_total").toString()
+                        val address = it.get("restaurant_location").toString()
 
 
                         order_readyTime.text = date.toString()

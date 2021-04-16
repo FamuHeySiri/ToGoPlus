@@ -62,6 +62,17 @@
             android:text="@string/in_process"
             android:layout_marginStart="10dp"/>
 
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/orders_card_order_status"
+            android:numStars="5"
+            android:rating="0"
+            android:isIndicator="false"
+            android:stepSize=".5" />
+
+
     </RelativeLayout>
 
 

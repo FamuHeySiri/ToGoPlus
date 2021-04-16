@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,9 +26,9 @@ class CustomerMainActivity : AppCompatActivity() {
 
     // declare instances of fragments
     val customerHomeFragment = CustomerHomeFragment()
-    val customerLocationsFragment = CustomerLocationsFragment()
+    val customerMapsFragment = CustomerMapsFragment()
     val customerOrderHistoryFragment = CustomerOrderHistoryFragment()
-    val customerPlaceOrderFragment = CustomerPlaceOrderFragment()
+    val customerPlaceOrderFragment = CustomerMenuFragment()
     val customerShoppingCartFragment = CustomerShoppingCartFragment()
 
     // Initialize Firebase Auth
@@ -54,7 +53,7 @@ class CustomerMainActivity : AppCompatActivity() {
                     setCurrentFragment(customerHomeFragment)
                 }
                 R.id.customerLocationsFragment -> {
-                    setCurrentFragment(customerLocationsFragment)
+                    setCurrentFragment(customerMapsFragment)
                 }
                 R.id.customerOrderHistoryFragment -> {
                     setCurrentFragment(customerOrderHistoryFragment)
