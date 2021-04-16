@@ -6,6 +6,6 @@ data class UserModel (
     val user_accountType: String = "",
     val user_email: String = "",
     val user_phoneNumber: String = "",
-    val user_uid: String = ""
-//    val user_photoURL: String = ""
+    val user_uid: String = "",
+    val user_photoURL: String = ""
 )

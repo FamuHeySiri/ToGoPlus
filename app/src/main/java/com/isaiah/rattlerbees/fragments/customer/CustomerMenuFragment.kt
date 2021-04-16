@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class CustomerPlaceOrderFragment : Fragment() {
+class CustomerMenuFragment : Fragment() {
 
     private companion object {
         private const val TAG = "CUST_MENU"
@@ -66,10 +66,9 @@ class CustomerPlaceOrderFragment : Fragment() {
         // assign layout manager and adapter to the view
         if (recyclerView != null) {
             recyclerView.layoutManager = LinearLayoutManager(context)
-        }
-        if (recyclerView != null) {
             recyclerView.adapter = MenuAdapter(options)
         }
+
     }
 
 
@@ -121,7 +120,7 @@ class CustomerPlaceOrderFragment : Fragment() {
 
             db.collection("USERS")
                 .document(auth.currentUser.uid)
-                .update("shopping_cart", FieldValue.arrayUnion("/MENU_ITEMS/$item_uid/"))
+                .update("shopping_cart", FieldValue.arrayUnion("/MENU_ITEMS/$item_uid"))
 
         }
 

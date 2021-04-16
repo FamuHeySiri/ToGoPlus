@@ -5,10 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".fragments.customer.CustomerHomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView_Welcome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Customer Home Fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily=""
+        android:text="@string/welcome_back"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal" />
 
 </FrameLayout>

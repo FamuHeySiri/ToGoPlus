@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -83,6 +84,9 @@ class EmployeeViewOrdersFragment : Fragment() {
             val order_time: TextView = holder.itemView.findViewById(R.id.orders_card_order_time)
             val order_status: TextView = holder.itemView.findViewById(R.id.orders_card_order_status)
             val user_name: TextView = holder.itemView.findViewById(R.id.orders_card_customer_name)
+            val order_rating: RatingBar = holder.itemView.findViewById(R.id.rating_bar)
+
+            order_rating.setIsIndicator(true)
 
             val userRef = db.collection("USERS").document(model.user_id.toString())
             userRef.get()
@@ -102,6 +106,7 @@ class EmployeeViewOrdersFragment : Fragment() {
             order_id.text = model.order_id
             order_time.text = model.order_time.toString()
             order_status.text = model.order_status
+            order_rating.rating = model.order_rating.toFloat()
 
         }
 

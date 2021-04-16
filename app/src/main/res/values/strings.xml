@@ -57,5 +57,6 @@
     <string name="in_process">In Process</string>
     <string name="complete">Complete</string>
     <string name="cancel">Cancel</string>
+    <string name="welcome_back">Welcome Back</string>
 
 </resources>

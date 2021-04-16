@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -18,13 +20,14 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.isaiah.rattlerbees.R
+import com.isaiah.rattlerbees.fragments.employee.EmployeeEditOrderFragment
 import com.isaiah.rattlerbees.models.OrdersModel
 
 
 class CustomerOrderHistoryFragment : Fragment() {
 
     private companion object {
-        private const val TAG = "CUSTOMER_ORDER_HISTORY_FRAGMENT"
+        private const val TAG = "CUST_ORDER_HIST_FRAG"
     }
 
 //    // Initialize Firebase Auth
@@ -88,6 +91,7 @@ class CustomerOrderHistoryFragment : Fragment() {
             val order_time: TextView = holder.itemView.findViewById(R.id.orders_card_order_time)
             val order_status: TextView = holder.itemView.findViewById(R.id.orders_card_order_status)
             val user_name: TextView = holder.itemView.findViewById(R.id.orders_card_customer_name)
+            val order_rating: RatingBar = holder.itemView.findViewById(R.id.rating_bar)
 
             val userRef = db.collection("USERS").document(model.user_id.toString())
             userRef.get()
@@ -107,6 +111,29 @@ class CustomerOrderHistoryFragment : Fragment() {
             order_id.text = model.order_id
             order_time.text = model.order_time.toString()
             order_status.text = model.order_status
+            order_rating.rating = model.order_rating.toFloat()
+
+            order_rating.setOnRatingBarChangeListener {ratingBar, rating, fromUser ->
+
+                // get rating from rating bar
+                val rating = ratingBar.rating
+
+                // store rating in database
+                db.collection("ORDERS")
+                    .document(model.order_id)
+                    .update("order_rating", rating)
+                    .addOnSuccessListener { Log.d(TAG, "Order successfully updated") }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error updating order\n Order ID: $order_id", e) }
+
+                Toast.makeText(context, "Rating: $rating", Toast.LENGTH_SHORT).show()
+
+            }
+
+        }
+
+        private fun setRating() {
+
+
 
         }
 
